@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ví dụ Bài tập - Trang minh họa</title>
+  <link rel="stylesheet" href="styles4.css" />
+</head>
+<body>
+  <!-- B2: Skip link (chỉ hiển thị khi focus) -->
+  <a class="skip-link" href="#main-content">Chuyển đến Nội dung Chính</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="https://via.placeholder.com/120x40?text=Logo" alt="Logo trang" />
+        <h1 class="site-title">Trang minh họa - Thực hành CSS</h1>
+      </div>
+
+      <!-- B4: nav hiển thị inline-block, width ~80% -->
+      <nav class="main-nav" aria-label="Thanh điều hướng chính">
+        <ul>
+          <!-- B3: li mặc định là list-item; ở đây đổi sang inline-block để menu ngang -->
+          <li><a href="#section-1"><img src="https://via.placeholder.com/80x50?text=A" alt="" aria-hidden="true"> Trang A</a></li>
+          <li><a href="#section-2"><img src="https://via.placeholder.com/80x50?text=B" alt="" aria-hidden="true"> Trang B</a></li>
+          <li><a href="#section-3"><img src="https://via.placeholder.com/80x50?text=C" alt="" aria-hidden="true"> Trang C</a></li>
+          <li><a href="#section-4">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section id="section-1" class="panel">
+      <h2>Grid: Lưới hai cột</h2>
+      <p>Ví dụ sử dụng grid với hai cột mỗi cột chiếm khoảng 40% chiều rộng. Ảnh trong lưới sử dụng selector descendant để chiếm 100% chiều rộng của thẻ chứa.</p>
+
+      <div class="grid">
+        <article class="card">
+          <img src="https://via.placeholder.com/800x500?text=Ảnh+1" alt="Ảnh minh họa 1">
+          <h3>Tiêu đề ảnh 1</h3>
+          <p>Mô tả ngắn cho ảnh 1.</p>
+        </article>
+
+        <article class="card">
+          <img src="https://via.placeholder.com/800x500?text=Ảnh+2" alt="Ảnh minh họa 2">
+          <h3>Tiêu đề ảnh 2</h3>
+          <p>Mô tả ngắn cho ảnh 2.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="section-2" class="panel">
+      <h2>Flex: Thư viện ảnh</h2>
+      <p>Ví dụ flex với flex-wrap và justify-content để điều khiển bố cục.</p>
+
+      <div class="gallery flex-demo" role="list">
+        <div class="item" role="listitem"><img src="https://via.placeholder.com/400x250?text=G1" alt="Gallery 1"></div>
+        <div class="item" role="listitem"><img src="https://via.placeholder.com/400x250?text=G2" alt="Gallery 2"></div>
+        <div class="item" role="listitem"><img src="https://via.placeholder.com/400x250?text=G3" alt="Gallery 3"></div>
+        <div class="item" role="listitem"><img src="https://via.placeholder.com/400x250?text=G4" alt="Gallery 4"></div>
+        <div class="item" role="listitem"><img src="https://via.placeholder.com/400x250?text=G5" alt="Gallery 5"></div>
+      </div>
+
+      <div class="controls">
+        <label>Thử justify-content:
+          <select id="jc-select" aria-label="Chọn justify content">
+            <option value="flex-start">flex-start</option>
+            <option value="center" selected>center</option>
+            <option value="space-between">space-between</option>
+            <option value="space-around">space-around</option>
+          </select>
+        </label>
+        <label>Thử flex-wrap:
+          <select id="fw-select" aria-label="Chọn flex wrap">
+            <option value="nowrap">nowrap</option>
+            <option value="wrap" selected>wrap</option>
+            <option value="wrap-reverse">wrap-reverse</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section id="section-3" class="panel">
+      <h2>Kiểm tra truy cập</h2>
+      <p>Sử dụng WAVE hoặc validator HTML để kiểm tra truy cập và cú pháp. Công cụ: <a href="https://wave.webaim.org/" target="_blank" rel="noopener">https://wave.webaim.org/</a></p>
+    </section>
+
+    <section id="section-4" class="panel">
+      <h2>Gửi phản hồi</h2>
+      <form class="contact-form" action="#" method="post" aria-label="Form liên hệ">
+        <label for="name">Tên</label>
+        <input id="name" name="name" type="text" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+
+        <label for="message">Lời nhắn</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Gửi</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Ví dụ thực hành - dùng để minh họa các yêu cầu bài tập. Kiểm tra bằng WAVE và validator HTML.</p>
+  </footer>
+
+  <script>
+    // Thêm tương tác đơn giản cho ví dụ: thay đổi justify-content và flex-wrap runtime
+    const gallery = document.querySelector('.flex-demo');
+    const jc = document.getElementById('jc-select');
+    const fw = document.getElementById('fw-select');
+    jc.addEventListener('change', () => {
+      gallery.style.justifyContent = jc.value;
+    });
+    fw.addEventListener('change', () => {
+      gallery.style.flexWrap = fw.value;
+    });
+  </script>
+</body>
+</html>

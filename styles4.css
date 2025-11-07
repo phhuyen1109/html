@@ -1,0 +1,221 @@
+:root{
+  --max-width: 1100px;
+  --gap: 16px;
+  --accent: #0b66ff;
+  --muted: #f3f4f6;
+  --card-bg: #ffffff;
+}
+
+/* SKIP LINK (B2) */
+.skip-link{
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus{
+  left: 8px;
+  top: 8px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+/* Global */
+*{box-sizing: border-box;}
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+  color: #111;
+  line-height: 1.5;
+  background: #fafafa;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+}
+.container{
+  max-width: var(--max-width);
+  width: 100%;
+}
+
+/* Header */
+.site-header{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.header-inner{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  width: 100%;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand img{ width: 120px; height:auto; display:block; }
+
+/* B4: nav dùng inline-block và có chiều rộng khoảng 80% */
+.main-nav{
+  display: inline-block; /* yêu cầu */
+  width: 80%;            /* ~80% */
+  background: var(--muted);
+  padding: 8px 12px;
+  border-radius: 8px;
+  vertical-align: top;
+}
+.main-nav ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.main-nav li{
+  display: inline-block; /* chuyển li sang inline-block để thành menu ngang (B3) */
+  margin-right: 14px;
+}
+.main-nav a{
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  border-radius: 4px;
+}
+.main-nav a:focus,
+.main-nav a:hover{
+  background: rgba(11,102,255,0.08);
+  outline: none;
+}
+
+/* B5: ảnh trong nav dùng descendant selector và có chiều rộng ~10% */
+.main-nav img{
+  width: 10%; /* yêu cầu: ảnh nav có width khoảng 10% (của vùng nav) */
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+/* Main panels */
+main{
+  width: 100%;
+  max-width: var(--max-width);
+  margin-top: 8px;
+}
+.panel{
+  background: transparent;
+  margin-bottom: 24px;
+  padding: 6px 0;
+}
+
+/* B6-B8: Grid hai cột, mỗi cột ~40% */
+.grid{
+  display: grid;
+  grid-template-columns: 40% 40%; /* mỗi cột ~40% */
+  column-gap: 4%;
+  row-gap: 16px; /* row-gap dùng để thử nghiệm (B8) */
+}
+.card{
+  background: var(--card-bg);
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+.grid img{
+  width: 100%; /* descendant selector: ảnh trong .grid chiếm 100% (B7) */
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+/* B9: Flex example */
+.flex-demo{
+  display: flex;          /* dùng flex (B9) */
+  flex-wrap: wrap;        /* default wrap */
+  justify-content: center; /* mặc định center */
+  gap: 12px;
+  margin-top: 12px;
+}
+.flex-demo .item{
+  flex: 1 1 30%;
+  min-width: 200px;
+  background: var(--card-bg);
+  padding: 8px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+.flex-demo img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+/* Form */
+.contact-form{
+  display: grid;
+  gap: 8px;
+  max-width: 520px;
+}
+.contact-form label{ font-weight: 600; font-size: 0.95rem; }
+.contact-form input, .contact-form textarea{
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font: inherit;
+}
+.contact-form button{
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.contact-form button:focus{ outline: 3px solid rgba(11,102,255,0.2); }
+
+/* Controls area (JS interactive) */
+.controls{
+  margin-top: 12px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.controls label{ font-size: 0.9rem; }
+
+/* Footer */
+.site-footer{
+  margin-top: 28px;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Responsive: trên màn nhỏ, chuyển nav về block (không phá vỡ yêu cầu cho desktop) */
+@media (max-width: 800px){
+  .header-inner{ flex-direction: column; align-items: flex-start; gap: 12px; }
+  .main-nav{
+    display: block; /* override để hiển thị tốt trên thiết bị di động */
+    width: 100%;
+  }
+  .main-nav img{ width: 36px; } /* nhỏ lại cho mobile */
+  .grid{ grid-template-columns: 1fr; } /* stack cột */
+  .flex-demo .item{ flex-basis: 45%; min-width: 140px; }
+}
+
+/* Small touch-ups */
+h1.site-title{ font-size: 1.1rem; margin: 0; }
+h2{ margin-top: 0; }
