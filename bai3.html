@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bài tập CSS - Grid & Flex</title>
+  <link rel="stylesheet" href="styles3.css" />
+</head>
+<body>
+  <!-- Skip-link / liên kết nhanh để truy cập nội dung chính -->
+  <a class="skip-link" href="#main-content">Chuyển đến Nội dung Chính</a>
+
+  <header class="site-header" role="banner">
+    <nav class="site-nav" aria-label="Chính">
+      <ul>
+        <!-- Chú thích: phần tử li hiện tại được hiển thị bằng inline-block (xem styles.css).
+             Ở mặc định, <li> là display: list-item; ta đã thay đổi để dễ bố trí ngang. -->
+        <li><a href="#home">Trang chủ</a></li>
+        <li><a href="#grid-gallery">Lưới ảnh</a></li>
+        <li><a href="#flex-gallery">Flex ảnh</a></li>
+        <li><a href="#about">Về tôi</a></li>
+        <!-- Ảnh logo/biểu tượng trong nav: dùng selector con (descendant) để đặt width ~10% -->
+        <li class="nav-logo"><a href="#home"><img src="https://picsum.photos/seed/logo/200/200" alt="Logo trang"></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1" role="main">
+    <section id="home" class="hero">
+      <h1>Ví dụ thực hành Grid & Flex</h1>
+      <p>Trang này minh họa các yêu cầu: liên kết tới nội dung chính, nav inline-block, selector con cho ảnh, lưới 2 cột (mỗi cột ~40%), và gallery flex.</p>
+    </section>
+
+    <section id="grid-gallery" class="grid-section">
+      <h2>Lưới hai cột (class: grid)</h2>
+      <p>Thư viện sử dụng CSS Grid; mỗi cột chiếm ~40% (xem styles.css).</p>
+      <div class="grid">
+        <div class="item"><img src="https://picsum.photos/seed/g1/800/600" alt="Ảnh 1 trong lưới"></div>
+        <div class="item"><img src="https://picsum.photos/seed/g2/800/600" alt="Ảnh 2 trong lưới"></div>
+        <div class="item"><img src="https://picsum.photos/seed/g3/800/600" alt="Ảnh 3 trong lưới"></div>
+        <div class="item"><img src="https://picsum.photos/seed/g4/800/600" alt="Ảnh 4 trong lưới"></div>
+      </div>
+      <p class="note">Ghi chú: selector descendant .grid img được dùng để đặt width:100% cho tất cả ảnh trong lớp lưới.</p>
+    </section>
+
+    <section id="flex-gallery" class="flex-section">
+      <h2>Gallery Flex (class: gallery-flex)</h2>
+      <p>Thư viện này dùng display:flex; thử nghiệm với flex-wrap và justify-content.</p>
+      <div class="gallery-flex" aria-label="Thư viện ảnh dạng flex">
+        <div class="item"><img src="https://picsum.photos/seed/f1/600/400" alt="Ảnh 1 flex"></div>
+        <div class="item"><img src="https://picsum.photos/seed/f2/600/400" alt="Ảnh 2 flex"></div>
+        <div class="item"><img src="https://picsum.photos/seed/f3/600/400" alt="Ảnh 3 flex"></div>
+        <div class="item"><img src="https://picsum.photos/seed/f4/600/400" alt="Ảnh 4 flex"></div>
+        <div class="item"><img src="https://picsum.photos/seed/f5/600/400" alt="Ảnh 5 flex"></div>
+      </div>
+      <p class="note">Ghi chú: ảnh trong gallery-flex không bị ảnh hưởng bởi quy tắc .grid img vì chúng khác lớp.</p>
+    </section>
+
+    <section id="about">
+      <h2>Ghi chú về kiểu dáng phần tử li</h2>
+      <p>Trong tệp CSS, <code>nav ul li</code> hiện được đặt <strong>display:inline-block</strong> để các mục điều hướng nằm ngang, có padding và margin hợp lý. Nếu để mặc định (list-item), chúng sẽ xếp dọc theo khối (block) — không phù hợp cho thanh điều hướng ngang.</p>
+      <p>Kiểm tra mã bằng công cụ Wave: https://wave.webaim.org/</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© 2025 — Ví dụ bài tập CSS</p>
+  </footer>
+
+  <script>
+    // Sẽ set focus vào main khi nhấn skip-link (từ keyboard) - hỗ trợ truy cập
+    document.querySelectorAll('.skip-link').forEach(link => {
+      link.addEventListener('click', function() {
+        const id = this.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          target.setAttribute('tabindex','-1');
+          target.focus();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

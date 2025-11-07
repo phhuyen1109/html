@@ -1,0 +1,163 @@
+root{
+  --max-width: 1100px;
+  --gap: 20px;
+  --accent: #2b6cb0;
+  --muted: #6b7280;
+  --bg: #f8fafc;
+  --content-bg: #ffffff;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+  display:flex;
+  justify-content:center;
+}
+.site-header, main, .site-footer{
+  width:100%;
+  max-width:var(--max-width);
+  margin: var(--gap);
+  background:var(--content-bg);
+  padding:16px;
+  border-radius:8px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* Skip link cho truy cập */
+.skip-link{
+  position:absolute;
+  left:-9999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.skip-link:focus{
+  left:8px;
+  top:8px;
+  width:auto;
+  height:auto;
+  padding:8px 12px;
+  background:#111827;
+  color:white;
+  z-index:1000;
+  border-radius:4px;
+}
+
+/* -------------- NAV -------------- */
+/* Yêu cầu 4: Thay đổi phần tử nav để sử dụng inline-block và có chiều rộng khoảng 80%.
+   Ta đặt .site-nav display:inline-block và width:80% để thực hiện. */
+.site-nav{
+  display:inline-block; /* inline-block theo yêu cầu */
+  width:80%;            /* ~80% như đề bài */
+  vertical-align:middle;
+}
+
+/* Danh sách trong nav */
+.site-nav ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex; /* dùng flex bên trong để canh các li khi cần */
+  gap:12px;
+  align-items:center;
+}
+
+/* Yêu cầu 3: bình luận đã đưa trong index.html.
+   Ở đây ta đặt li là inline-block (mô tả hiện tại) */
+.site-nav ul li{
+  display:inline-block;
+  margin:0;
+  padding:0;
+}
+
+/* Link trong nav */
+.site-nav a{
+  text-decoration:none;
+  color:var(--accent);
+  padding:8px 10px;
+  display:inline-block;
+  border-radius:4px;
+}
+.site-nav a:hover, .site-nav a:focus{
+  background:rgba(43,108,176,0.08);
+  outline:none;
+}
+
+/* Yêu cầu 5: Sử dụng bộ chọn con cháu để chỉ định kiểu cho hình ảnh trong thanh điều hướng sao cho có chiều rộng khoảng 10%. */
+/* Đây là selector descendant: .site-nav img => ảnh nằm trong nav (mọi mức con). */
+.site-nav img{
+  width:10%;
+  max-width:48px;
+  height:auto;
+  border-radius:50%;
+  vertical-align:middle;
+}
+
+/* -------------- GRID -------------- */
+/* Yêu cầu 6: Tạo kiểu cho lớp lưới để sử dụng lưới hai cột, mỗi cột chiếm khoảng 40% */
+.grid{
+  display:grid;
+  grid-template-columns: 40% 40%; /* mỗi cột ~40% */
+  column-gap:var(--gap);
+  row-gap:var(--gap);
+  justify-content:center; /* Yêu cầu 8: thử nghiệm justify-content */
+  align-items:start;      /* Yêu cầu 8: thử nghiệm align-items */
+  margin-top:12px;
+}
+
+/* Yêu cầu 7: sử dụng selector descendant để chỉ định kiểu cho các hình ảnh trong lớp lưới sao cho chiều rộng là 100% */
+.grid img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:6px;
+}
+
+/* Đảm bảo ảnh trong grid không ảnh hưởng ảnh trong flex (khác lớp) */
+
+/* -------------- FLEX GALLERY -------------- */
+/* Yêu cầu 9: định dạng lớp flex để sử dụng flex, thử nghiệm với flex-wrap và justify-content */
+.gallery-flex{
+  display:flex;
+  flex-wrap:wrap;         /* cho phép xuống dòng */
+  justify-content:center; /* căn giữa các phần tử */
+  gap:16px;
+  margin-top:12px;
+}
+
+/* Mỗi item flex có kích thước cơ bản */
+.gallery-flex .item{
+  flex: 0 1 calc(33% - 16px); /* 3 cột trên màn lớn, nhưng sẽ xuống hàng khi cần */
+  min-width:180px;
+}
+
+.gallery-flex img{
+  width:100%;
+  height:auto;
+  border-radius:6px;
+  display:block;
+}
+
+/* -------------- Các kiểu khác -------------- */
+.hero, .grid-section, .flex-section, #about{
+  margin-bottom:16px;
+}
+.note{color:var(--muted);font-size:0.95rem}
+.site-footer{ text-align:center; font-size:0.9rem; color:var(--muted) }
+
+/* Responsive: khi màn nhỏ, chuyển grid về 1 cột hoặc 2 cột tự do */
+@media (max-width:900px){
+  .grid{ grid-template-columns: 1fr 1fr; }
+  .site-nav{ width:100%; }
+}
+@media (max-width:600px){
+  .grid{ grid-template-columns: 1fr; }
+  .gallery-flex .item{ flex: 0 1 100%; }
+  .site-nav ul{ flex-wrap:wrap; gap:8px }
+  .site-nav img{ width:12% }
+}
